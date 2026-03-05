@@ -1,13 +1,52 @@
-<h1>Panel Sterowania Koleją</h1>
+<div class="container">
+  <header class="header">
+    <h1>Zajezdnia</h1>
+    <button class="btn-refresh" (click)="trainService.loadTrains()">Odśwież dane</button>
+  </header>
 
-<div class="depot">
-    @for (train of trainService.trains(); track train.id) {
-    <div class="train-card">
-        <h3>{{ train.name }}</h3>
-        <p>Status: <strong>{{ train.status }}</strong></p>
-        <p>Przebieg: {{ train.mileage }} km</p>
+  <div class="search-container">
+    <div class="search-wrapper">
+      <input type="text" placeholder="Wyszukaj pociąg po nazwie lub typie..." (input)="onSearchChange($event)"
+        class="search-input">
+    </div>
+  </div>
+
+  <div class="train-list">
+    @for (train of filteredTrains(); track train.id) {
+    <div class="train-item">
+      <div class="status-indicator" [ngClass]="train.status"></div>
+
+      <div class="train-info">
+        <span class="train-name">{{ train.name }}</span>
+        <span class="train-model">{{ train.type }} • {{ train.mileage | mileage }} km</span>
+      </div>
+
+      <div class="status-badge" [ngClass]="train.status">
+        {{ getStatusLabel(train.status) }}
+      </div>
+
+      <div class="actions">
+        <button class="btn-edit" (click)="editTrain(train)">
+          Edytuj
+        </button>
+        <button class="btn-details" (click)="viewDetails(train.id)">
+          Szczegóły
+        </button>
+      </div>
     </div>
     } @empty {
-    <p>Brak pociągów w bazie lub trwa ładowanie...</p>
+    <div class="empty-state">Brak taboru w zajezdni...</div>
     }
+  </div>
 </div>
+
+<dialog>
+  @if (selectedTrain(); as train) {
+  <div class="details-panel">
+    <h3>Szczegóły: {{ train.name }}</h3>
+    <p>Model: {{ train.type }}</p>
+    <p>Aktualny przebieg: {{ train.mileage | mileage }} km</p>
+    <button (click)="selectedTrain.set(null)">Zamknij</button>
+  </div>
+  }
+</dialog>

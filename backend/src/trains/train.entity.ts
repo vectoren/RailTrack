@@ -12,8 +12,8 @@ export class Train {
   @IsNotEmpty()
   type: string;     // e.g., "Alstom"
 
-  @IsEnum(['active', 'maintenance', 'out_of_service'])
-  status: 'active' | 'maintenance' | 'out_of_service';
+  @IsEnum(['active', 'standby', 'maintenance', 'out_of_service'])
+  status: 'active' | 'standby' | 'maintenance' | 'out_of_service';
 
   @IsNumber()
   mileage: number;   // in kilometers

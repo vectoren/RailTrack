@@ -6,7 +6,7 @@ export interface Train {
 
   type: string;     // e.g., "Alstom"
 
-  status: 'active' | 'maintenance' | 'out_of_service';
+  status: 'active' | 'standby' | 'maintenance' | 'out_of_service';
 
   mileage: number;   // in kilometers
 }
