@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:wght@400;700&display=swap');
 
-::root{
+:root{
     --primary: #f8f8f8;
-    --accent: #4f9ea0;
+    --secondary: #4f9ea0;
+    --accent: #4e7f81;
     --warning: #fe5f55;
 }
 
@@ -16,7 +17,8 @@
     Color palette:
 
     Primary: #f8f8f8
-    Accent: #4f9ea0 cadetblue
+    Secondary: #4f9ea0 cadetblue
+    Accent: #4e7f81
     Warning: #fe5f55
 
 */
