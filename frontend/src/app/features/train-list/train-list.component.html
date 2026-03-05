@@ -1,1 +1,13 @@
-<p>train-list works!</p>
+<h1>Panel Sterowania Koleją</h1>
+
+<div class="depot">
+    @for (train of trainService.trains(); track train.id) {
+    <div class="train-card">
+        <h3>{{ train.name }}</h3>
+        <p>Status: <strong>{{ train.status }}</strong></p>
+        <p>Przebieg: {{ train.mileage }} km</p>
+    </div>
+    } @empty {
+    <p>Brak pociągów w bazie lub trwa ładowanie...</p>
+    }
+</div>
