@@ -1,0 +1,30 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--primary);
+}
+
+.logo  h1{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.logo  span{
+    font-size: 1.5rem;
+    color: cadetblue;
+}
+
+.links{
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+}
+
+.links a{
+    text-decoration: none;
+    color: #000;
+}
+
+.active{
+    font-weight: 600;
+}
