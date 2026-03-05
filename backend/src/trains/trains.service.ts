@@ -6,8 +6,10 @@ export class TrainsService {
   // Our "In-Memory" Database
   private trains: Train[] = [
     { id: 1, name: 'Pendolino ED250', type: 'High-speed', status: 'active', mileage: 125000 },
-    { id: 2, name: 'Dragon 2', type: 'Freight', status: 'active', mileage: 45000 },
+    { id: 2, name: 'Dragon 2', type: 'Freight', status: 'standby', mileage: 45000 },
     { id: 3, name: 'Dart Pesa', type: 'Intercity', status: 'maintenance', mileage: 89000 },
+    { id: 4, name: 'Elf 2', type: 'Intercity', status: 'out_of_service', mileage: 689000 },
+    { id: 5, name: 'ET-41', type: 'Freight', status: 'out_of_service', mileage: 1890000 },
   ];
 
   findAll(): Train[] {
