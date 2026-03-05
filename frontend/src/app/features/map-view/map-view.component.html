@@ -1,1 +1,36 @@
-<p>map-view works!</p>
+<div class="container">
+  <header class="header">
+    <h1>Trasy</h1>
+  </header>
+  <div class="thumbnail-grid">
+    @for (route of routeService.routes(); track route.id) {
+    <div class="thumbnail-card" (click)="openMap(route)">
+      <div class="thumb-preview" [style.border-color]="route.lineColor">
+        <span class="line-icon" [style.background]="route.lineColor"></span>
+      </div>
+      <div class="thumb-info">
+        <strong>{{ route.lineName }}</strong>
+        <span>Punkty: {{ route.path.length }}</span>
+      </div>
+    </div>
+    }
+  </div>
+  @if (activeRoute(); as route) {
+  <div class="modal-overlay" (click)="closeMap()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <header>
+        <h3>{{ route.lineName }}</h3>
+        <button class="close-btn" (click)="closeMap()">✕</button>
+      </header>
+
+      <div class="canvas-wrapper">
+        <canvas #mapCanvas width="800" height="500"></canvas>
+      </div>
+
+      <footer>
+        <p>Status: <span [style.color]="route.lineColor">Aktywna</span></p>
+      </footer>
+    </div>
+  </div>
+  }
+</div>
