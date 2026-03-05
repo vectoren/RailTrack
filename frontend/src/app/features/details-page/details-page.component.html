@@ -1,0 +1,47 @@
+<div class="container">
+  <header class="header">
+    <h1>Karta Pojazdu</h1>
+    <button class="btn-back" (click)="goBack()">Powrót</button>
+  </header>
+
+  @if(selectedTrain(); as train) {
+  <div class="train-details-card">
+    <div class="status-bar" [ngClass]="train.status"></div>
+
+    <div class="card-content">
+      <div class="main-info">
+        <div class="title-section">
+          <span class="train-name">{{ train.name }}</span>
+          <div class="status-badge" [ngClass]="train.status">
+            {{ getStatusLabel(train.status) }}
+          </div>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-group">
+            <span class="label">Rodzaj lokomotywy/EZT</span>
+            <span class="value">{{ train.type }}</span>
+          </div>
+          
+          <div class="detail-group">
+            <span class="label">Aktualny przebieg</span>
+            <span class="value">{{ train.mileage | mileage }} km</span>
+          </div>
+
+          <div class="detail-group">
+            <span class="label">Identyfikator systemu</span>
+            <span class="value">#{{ train.id }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-edit-large">✏️ Edytuj dane</button>
+        <button class="btn-history" disabled>📋 Historia serwisu</button>
+      </div>
+    </div>
+  </div>
+  } @else {
+    <div class="loader">Ładowanie danych taboru...</div>
+  }
+</div>

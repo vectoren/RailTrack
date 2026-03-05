@@ -1,0 +1,138 @@
+:host {
+  --color-active: #2ecc71;
+  --color-standby: #65a9a9;
+  --color-maintenance: #f39c12;
+  --color-out-of-service: #e74c3c;
+  --color-text-main: #2c3e50;
+  --color-text-sub: #7f8c8d;
+}
+
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.train-details-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.status-bar {
+  height: 12px;
+  width: 100%;
+}
+
+.status-bar.active { background-color: var(--color-active); }
+.status-bar.standby { background-color: var(--color-standby); }
+.status-bar.maintenance { background-color: var(--color-maintenance); }
+.status-bar.out_of_service { background-color: var(--color-out-of-service); }
+
+.card-content {
+  padding: 2rem;
+}
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.title-section .train-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-group .label {
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detail-group .value {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+/* Przyciski na stronie szczegółów */
+.card-actions {
+  display: flex;
+  gap: 15px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1.5rem;
+}
+
+.btn-back {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text-sub);
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  background: #f8f8f8;
+  color: var(--color-text-main);
+}
+
+.btn-edit-large {
+  background-color: var(--color-text-main);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-history {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: not-allowed;
+  
+}
+
+.btn-history:hover {
+  background: #fcfcfc;
+}

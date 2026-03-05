@@ -26,12 +26,7 @@
       </div>
 
       <div class="actions">
-        <button class="btn-edit" (click)="editTrain(train)">
-          Edytuj
-        </button>
-        <button class="btn-details" (click)="viewDetails(train.id)">
-          Szczegóły
-        </button>
+        <a [routerLink]="['details', train.id]">Szczegóły</a>
       </div>
     </div>
     } @empty {
@@ -39,14 +34,3 @@
     }
   </div>
 </div>
-
-<dialog>
-  @if (selectedTrain(); as train) {
-  <div class="details-panel">
-    <h3>Szczegóły: {{ train.name }}</h3>
-    <p>Model: {{ train.type }}</p>
-    <p>Aktualny przebieg: {{ train.mileage | mileage }} km</p>
-    <button (click)="selectedTrain.set(null)">Zamknij</button>
-  </div>
-  }
-</dialog>
