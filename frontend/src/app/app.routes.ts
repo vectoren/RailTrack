@@ -7,10 +7,10 @@ import { HomePageComponent } from './features/home-page/home-page.component';
 import { DetailsPageComponent } from './features/details-page/details-page.component';
 
 export const routes: Routes = [
-    {path: '', component: HomePageComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'train-list', component: TrainListComponent},
-    {path: 'train-list/details/:id', component: DetailsPageComponent},
-    {path: 'map-view', component: MapViewComponent},
-    {path: '**', component: ErrorPageComponent}
+    {path: '', component: HomePageComponent, title: 'RailTrack'},
+    {path: 'dashboard', component: DashboardComponent, title: 'Dashboard'},
+    {path: 'train-list', component: TrainListComponent, title: 'Train List'},
+    {path: 'train-list/details/:id', component: DetailsPageComponent, title: 'Details'},
+    {path: 'map-view', component: MapViewComponent, title: 'Interactive Map'},
+    {path: '**', component: ErrorPageComponent, title: '404 Derailed'}
 ];
