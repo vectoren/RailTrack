@@ -1,1 +1,44 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <header class="stats-row">
+    <div class="card gauge-card active">
+      <app-gauge [value]="activePercent()" color="#2ecc71" label="W trasie"></app-gauge>
+    </div>
+    <div class="card gauge-card standby">
+      <app-gauge [value]="standbyPercent()" color="#65a9a9" label="Oczekiwanie"></app-gauge>
+    </div>
+    <div class="card gauge-card maintenance">
+      <app-gauge [value]="maintPercent()" color="#f39c12" label="Serwis"></app-gauge>
+    </div>
+    <div class="card gauge-card oos">
+      <app-gauge [value]="oosPercent()" color="#e74c3c" label="Wyłączone"></app-gauge>
+    </div>
+  </header>
+
+
+  <main class="dashboard-grid">
+
+    <section class="card alerts-section">
+      <h3>Pilne Alerty</h3>
+      <ul class="alert-list">
+        @for(alert of alerts(); track $index){
+          <li class="alert-item" [ngClass]="alert.status"><strong>{{alert.trainName}}</strong> {{alert.statusMessage}}</li>
+        }
+      </ul>
+    </section>
+
+    <section class="card map-preview">
+      <h3>Aktywność na sieci</h3>
+      <div class="mini-map-placeholder">
+        <p>5 pociągów w ruchu na Linii Północnej</p>
+      </div>
+    </section>
+
+    <section class="card forecast-section">
+      <h3>Nadchodzące serwisy</h3>
+      <div class="forecast-chart">
+        <p>Pon: 2 | Wt: 0 | Śr: 4 | Czw: 1</p>
+      </div>
+    </section>
+
+  </main>
+</div>
