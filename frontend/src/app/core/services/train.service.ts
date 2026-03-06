@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class TrainService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/trains'; 
+  private apiUrl = '/api/trains'; 
 
 
   #trains = signal<Train[]>([]); 

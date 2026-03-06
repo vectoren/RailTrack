@@ -1,7 +1,7 @@
 export interface CanvasPoint {
   x: number;
   y: number;
-  stationName?: string; // Opcjonalna nazwa przystanku
+  stationName: string; // Opcjonalna nazwa przystanku
 }
 
 export interface TrainRoute {
