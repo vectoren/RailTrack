@@ -83,7 +83,7 @@ export class MapViewComponent implements OnInit {
     if (!ctx) return;
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, 650, 600);
+    ctx.clearRect(0, 0, 950, 600);
 
     ctx.translate(this.offsetX, this.offsetY);
     ctx.scale(this.scale, this.scale);

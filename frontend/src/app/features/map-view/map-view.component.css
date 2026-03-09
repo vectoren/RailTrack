@@ -1,5 +1,5 @@
 .container {
-  width: 900px;
+  width: 1200px;
   margin: 2rem auto;
 }
 .header {
@@ -84,7 +84,7 @@
 
 /* Canvas Area: 650px */
 .canvas-container {
-  width: 650px;
+  width: 950px;
   background: white;
   cursor: grab;
   overflow: hidden;
