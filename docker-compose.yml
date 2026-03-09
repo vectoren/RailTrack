@@ -1,28 +1,41 @@
 services:
   db:
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     container_name: rail-db
+    restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: rail_user
+      POSTGRES_PASSWORD: rail_password
       POSTGRES_DB: railtrack_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    # KLUCZOWY ELEMENT: Definicja zdrowia kontenera
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rail_user -d railtrack_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rail-network
 
   backend:
     build: ./backend
     container_name: rail-api
+    restart: on-failure
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/usr/src/app
-      - /usr/src/app/node_modules # Don't overwrite node_modules with local ones
+      - /usr/src/app/node_modules
     depends_on:
-      - db
+      db:
+        condition: service_healthy # Teraz to zadziała!
     environment:
-      DATABASE_URL: postgres://user:password@db:5432/railtrack_db
+      DATABASE_URL: postgres://rail_user:rail_password@db:5432/railtrack_db
+    networks:
+      - rail-network
 
   frontend:
     build: ./frontend
@@ -34,6 +47,12 @@ services:
       - /app/node_modules
     depends_on:
       - backend
+    networks:
+      - rail-network
 
 volumes:
   postgres_data:
+
+networks:
+  rail-network:
+    driver: bridge
