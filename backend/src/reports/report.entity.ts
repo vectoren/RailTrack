@@ -1,13 +1,27 @@
-export enum Urgency{
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+export enum Urgency {
     IMMEDIATE,
     HIGH,
     MODERATE,
     LOW
 }
 
-export interface Report{
-    id: number,
-    reporterId: number,
-    content: string,
-    urgency: Urgency
-};
+@Entity('reports')
+export class Report {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    reporterId: number;
+
+    @Column('text')
+    content: string;
+
+    @Column({
+        type: 'enum',
+        enum: Urgency,
+        default: Urgency.LOW
+    })
+    urgency: Urgency;
+}
