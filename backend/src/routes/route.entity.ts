@@ -1,14 +1,29 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
 export interface CanvasPoint {
   x: number;
   y: number;
-  stationName: string; // Opcjonalna nazwa przystanku
+  stationName: string;
 }
 
-export interface TrainRoute {
+@Entity('routes')
+export class TrainRoute {
+  @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
   trainId: number;
-  lineName: string;    // np. "Linia Średnicowa"
-  lineColor: string;   // np. "#3498db"
-  path: CanvasPoint[]; // Punkty załamania linii
-  currentPos: number;  // Procent postępu pociągu (0-100)
+
+  @Column()
+  lineName: string;
+
+  @Column()
+  lineColor: string;
+
+  // Typ jsonb pozwala przechowywać tablicę obiektów CanvasPoint
+  @Column({ type: 'jsonb' })
+  path: CanvasPoint[];
+
+  @Column({ type: 'float', default: 0 })
+  currentPos: number;
 }
