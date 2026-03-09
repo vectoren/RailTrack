@@ -1,20 +1,18 @@
-import { IsString, IsNotEmpty, IsEnum, IsNumber, IsDateString } from 'class-validator';
+import { Alert } from "src/alerts/alert.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity("trains")
 export class Train {
-  @IsNumber()
-  @IsNotEmpty()
+  @PrimaryGeneratedColumn()
   id: number;
-
-  @IsString()
-  @IsNotEmpty()
+  @Column()
   name: string;      // e.g., "Pendolino ED250"
-
-  @IsString()
-  @IsNotEmpty()
+  @Column()
   type: string;     // e.g., "Alstom"
-
-  @IsEnum(['active', 'maintenance', 'out_of_service'])
-  status: 'active' | 'maintenance' | 'out_of_service';
-
-  @IsNumber()
+  @Column({default: 'standby'})
+  status: 'active' | 'standby' | 'maintenance' | 'out_of_service';
+  @Column({type: "int", default: 0 })
   mileage: number;   // in kilometers
+  @OneToMany(() => Alert, (alert) => alert.train)
+  alerts: Alert[]
 }

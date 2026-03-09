@@ -1,1 +1,33 @@
-<p>map-view works!</p>
+<div class="container">
+  <header class="header">
+    <h1>Interaktywna Mapa Linii Kolejowych</h1>
+  </header>
+
+  <div class="map-dashboard">
+    <aside class="sidebar">
+      <h3>Dostępne Linie</h3>
+      <div class="route-list">
+        @for (route of routes(); track route.id) {
+        <div class="route-card" (mouseenter)="hoveredRouteId.set(route.id)" (mouseleave)="hoveredRouteId.set(null)"
+          [class.active]="hoveredRouteId() === route.id">
+          <span class="indicator" [style.background]="route.lineColor"></span>
+          <div class="info">
+            <strong>{{ route.lineName }}</strong>
+            <small>{{ route.path.length }} stacji</small>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="controls-hint">
+        <p>🖱️ Scroll: Zoom</p>
+        <p>🖱️ Drag: Przesuń</p>
+        <button (click)="resetView()">Resetuj widok</button>
+      </div>
+    </aside>
+
+    <main class="canvas-container" (wheel)="onWheel($event)" (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()" (mouseleave)="onMouseUp()">
+      <canvas #mapCanvas width="950" height="600"></canvas>
+    </main>
+  </div>
+</div>

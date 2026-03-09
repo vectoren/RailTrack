@@ -1,0 +1,14 @@
+<div class="gauge-wrapper">
+  <svg viewBox="0 0 100 60" class="gauge-svg">
+    <path class="gauge-bg" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#eee" stroke-width="8"
+      stroke-linecap="round" />
+
+    <path class="gauge-fill" [attr.d]="pathData" fill="none" [attr.stroke]="color()" stroke-width="8"
+      stroke-linecap="round" [style.stroke-dasharray]="circumference" [style.stroke-dashoffset]="dashOffset()" />
+  </svg>
+
+  <div class="gauge-value">
+    <span class="number">{{ value() }}%</span>
+    <span class="label">{{ label() }}</span>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+/* Zmienne dla kolorów */
+:host {
+  --color-active: #2ecc71;
+  --color-standby: #65a9a9;
+  --color-maintenance: #f39c12;
+  --color-out-of-service: #e74c3c;
+  --color-text-main: #2c3e50;
+  --color-text-sub: #7f8c8d;
+}
+
+.container {
+  width: 1200px;
+  margin: 2rem auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 1.1rem;
+  color: #95a5a6;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  border: 2px solid #edeff2;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  background-color: #f8f9fa;
+}
+
+.search-input:focus {
+  border-color: #3498db;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
+
+.search-input::placeholder {
+  color: #bdc3c7;
+  font-style: italic;
+}
+
+.train-list {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.train-item {
+  display: grid;
+  grid-template-columns: 6px 1fr auto auto;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s ease;
+}
+
+.train-item:hover {
+  background: #f9f9f9;
+}
+
+.train-item:last-child {
+  border-bottom: none;
+}
+
+/* Wskaźnik boczny */
+.status-indicator {
+  height: 40px;
+  border-radius: 3px;
+}
+
+.status-indicator.active { background-color: var(--color-active); }
+.status-indicator.standby { background-color: var(--color-standby); }
+.status-indicator.maintenance { background-color: var(--color-maintenance); }
+.status-indicator.out_of_service { background-color: var(--color-out-of-service); }
+
+.train-info {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.train-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-text-main);
+}
+
+.train-model {
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  margin-top: 4px;
+}
+
+/* Badge ze statusem */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-right: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.active { 
+  background-color: #2ecc711a; 
+  color: #1b7a43; 
+}
+.status-badge.standby{
+    background-color: #3498db1a;
+    color: #3498db;
+}
+.status-badge.maintenance { 
+  background-color: #f39c121a; 
+  color: #a3680c; 
+}
+.status-badge.out_of_service { 
+  background-color: #e74c3c1a; 
+  color: #962d22; 
+}
+
+.actions{
+  display: flex;
+  gap: 10px;
+}
+/* Przyciski */
+.actions > a {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: #000;
+}
+
+.actions > a:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+}
+
+.btn-refresh {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  color: var(--color-text-sub);
+}

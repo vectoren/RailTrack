@@ -1,1 +1,36 @@
-<p>train-list works!</p>
+<div class="container">
+  <header class="header">
+    <h1>Zajezdnia</h1>
+    <button class="btn-refresh" (click)="trainService.loadTrains()">Odśwież dane</button>
+  </header>
+
+  <div class="search-container">
+    <div class="search-wrapper">
+      <input type="text" placeholder="Wyszukaj pociąg po nazwie lub typie..." (input)="onSearchChange($event)"
+        class="search-input">
+    </div>
+  </div>
+
+  <div class="train-list">
+    @for (train of filteredTrains(); track train.id) {
+    <div class="train-item">
+      <div class="status-indicator" [ngClass]="train.status"></div>
+
+      <div class="train-info">
+        <span class="train-name">{{ train.name }}</span>
+        <span class="train-model">{{ train.type }} • {{ train.mileage | mileage }} km</span>
+      </div>
+
+      <div class="status-badge" [ngClass]="train.status">
+        {{ getStatusLabel(train.status) }}
+      </div>
+
+      <div class="actions">
+        <a [routerLink]="['details', train.id]">Szczegóły</a>
+      </div>
+    </div>
+    } @empty {
+    <div class="empty-state">Brak taboru w zajezdni...</div>
+    }
+  </div>
+</div>
