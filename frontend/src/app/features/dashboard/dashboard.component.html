@@ -19,17 +19,33 @@
 
     <section class="card alerts-section">
       <h3>Pilne Alerty</h3>
-      <ul class="alert-list">
-        @for(alert of alerts(); track $index){
-          <li class="alert-item" [ngClass]="alert.status"><strong>{{alert.trainName}}</strong> {{alert.statusMessage}}</li>
-        }
-      </ul>
+      <div class="alert-scroll-container">
+        <ul class="alert-list">
+          @for(alert of sortedAlerts(); track $index){
+          <li class="alert-item" [ngClass]="getUrgencyClass(alert.urgency)">
+            <strong>{{alert.trainName}}</strong> {{alert.statusMessage}}
+          </li>
+          } @empty {
+          <li class="alert-item no-alerts">Brak aktywnych alertów systemowych</li>
+          }
+        </ul>
+      </div>
     </section>
 
     <section class="card map-preview">
-      <h3>Aktywność na sieci</h3>
-      <div class="mini-map-placeholder">
-        <p>5 pociągów w ruchu na Linii Północnej</p>
+      <h3>Zgłoszenia na sieci</h3>
+      <div class="reports-container">
+        @for(report of sortedReports(); track report.id) {
+        <div class="report-item" [ngClass]="getUrgencyClass(report.urgency)">
+          <div class="report-header">
+            <span class="urgency-badge">{{ getUrgencyLabel(report.urgency) }}</span>
+            <span class="reporter-id">Numer Zgłaszającego: #{{ report.reporterId }}</span>
+          </div>
+          <p class="report-content">{{ report.content }}</p>
+        </div>
+        } @empty {
+        <div class="no-reports">Brak aktywnych zgłoszeń</div>
+        }
       </div>
     </section>
 

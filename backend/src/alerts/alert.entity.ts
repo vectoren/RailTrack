@@ -1,7 +1,9 @@
+import { Urgency } from "src/reports/report.entity";
+
 export interface Alert {
   id: number;
   trainId: number;
   statusMessage: string;
-  status: 'high' | 'medium' | 'low' | 'success';
+  urgency: Urgency;
   trainName?: string; // Opcjonalne pole, które wypełnimy w serwisie
 }

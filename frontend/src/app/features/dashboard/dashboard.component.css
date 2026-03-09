@@ -1,5 +1,5 @@
 .dashboard-container {
-  width: 900px;
+  width: 1200px;
   margin: 2rem auto;
   padding: 20px;
   background: #f8f9fa;
@@ -49,7 +49,7 @@
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid #eee;
 }
 
@@ -61,23 +61,160 @@
   padding-bottom: 10px;
 }
 
-.alert-list{
-    padding: 0;
+/* Kontener scrollowania */
+.alert-scroll-container {
+  max-height: 450px;
+  /* Taka sama wysokość jak w Zgłoszeniach */
+  overflow-y: auto;
+  padding-right: 8px;
+  /* Miejsce na scrollbar */
 }
 
-/* Alert styling */
-.alert-item {
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 6px;
+/* Custom Scrollbar (identyczny dla obu sekcji) */
+.alert-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.alert-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.alert-scroll-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.alert-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Lista i Elementy */
+.alert-list {
   list-style: none;
-  font-size: 0.9rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* Istniejące statusy */
-.alert-item.high { background: #fee2e2; color: #991b1b; border-left: 4px solid #e74c3c; }
-.alert-item.medium { background: #fef3c7; color: #92400e; border-left: 4px solid #f39c12; }
+.alert-item {
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  border-left: 4px solid transparent;
+  transition: transform 0.15s ease;
+}
 
-/* Nowe statusy dopasowane do listy */
-.alert-item.low { background: #e0f2fe; color: #075985; border-left: 4px solid #3498db; }
-.alert-item.success { background: #dcfce7; color: #166534; border-left: 4px solid #2ecc71; }
+.alert-item:hover {
+  filter: brightness(0.98);
+}
+.alert-item.high { background: #fee2e2; color: #991b1b; border-left-color: #e74c3c; }
+.alert-item.medium { background: #fef3c7; color: #92400e; border-left-color: #f39c12; }
+.alert-item.low { background: #e0f2fe; color: #075985; border-left-color: #3498db; }
+.alert-item.success { background: #dcfce7; color: #166534; border-left-color: #2ecc71; }
+
+.no-alerts {
+  background: #f8f9fa;
+  color: #7f8c8d;
+  text-align: center;
+  border: 1px dashed #ddd;
+}
+
+.reports-container {
+  max-height: 450px;
+  /* Stała wysokość z przewijaniem */
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Scrollbar styling dla lepszego wyglądu */
+.reports-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.reports-container::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.report-item {
+  background: #fdfdfd;
+  border: 1px solid #edf2f7;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.report-content {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.reporter-id {
+  font-size: 0.7rem;
+  color: #a0aec0;
+  font-weight: 600;
+}
+
+/* Etykiety priorytetów */
+.urgency-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+/* Kolorystyka na podstawie Enuma Urgency */
+.urg-immediate {
+  border-top: 3px solid #e53e3e;
+  background: #fff5f5;
+}
+
+.urg-immediate .urgency-badge {
+  background: #e53e3e;
+  color: white;
+}
+
+.urg-high {
+  border-top: 3px solid #ed8936;
+  background: #fffaf0;
+}
+
+.urg-high .urgency-badge {
+  background: #ed8936;
+  color: white;
+}
+
+.urg-moderate {
+  border-top: 3px solid #4299e1;
+  background: #ebf8ff;
+}
+
+.urg-moderate .urgency-badge {
+  background: #4299e1;
+  color: white;
+}
+
+.urg-low {
+  border-top: 3px solid #a0aec0;
+  background: #f7fafc;
+}
+
+.urg-low .urgency-badge {
+  background: #a0aec0;
+  color: white;
+}
