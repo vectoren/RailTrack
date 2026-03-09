@@ -1,1 +1,40 @@
-<p>home-page works!</p>
+<div class="home-container">
+    <header class="hero-section">
+        <div class="hero-text">
+            <h1>System Zarządzania Flotą Kolejową</h1>
+            <p>Monitoruj 126 aktywnych jednostek w czasie rzeczywistym. System działa poprawnie.</p>
+        </div>
+        <div class="quick-actions">
+            <button class="btn-primary" routerLink="/dashboard">Otwórz Dashboard</button>
+            <button class="btn-secondary" routerLink="/map-view">Mapa Sieci</button>
+        </div>
+    </header>
+
+    <div class="modules-grid">
+        <div class="module-card">
+            <div class="icon">🚄</div>
+            <h3>Flota</h3>
+            <p>Zarządaj flotą. Dostepny podgląd historii serwisu</p>
+            <a routerLink="/train-list" class="module-link">Zarządzaj pociągami →</a>
+        </div>
+
+        <div class="module-card warning">
+            <div class="icon">⚠️</div>
+            <h3>Bezpieczeństwo</h3>
+
+            @if (urgentCount() > 0) {
+            <p>Wymagana akcja: <strong>{{ urgentCount() }}</strong> krytycznych zdarzeń!</p>
+            } @else {
+            <p>Brak krytycznych incydentów na sieci.</p>
+            }
+            <a routerLink="/dashboard" class="module-link">Zobacz alerty →</a>
+        </div>
+
+        <div class="module-card">
+            <div class="icon">📍</div>
+            <h3>Infrastruktura</h3>
+            <p>Zgłoszono 5 nowych awarii sieci trakcyjnej w ostatniej godzinie.</p>
+            <a routerLink="/dashboard" class="module-link">Przegląd zgłoszeń →</a>
+        </div>
+    </div>
+</div>
