@@ -32,6 +32,7 @@ export class MapViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.trainService.loadTrains();
     this.routeService.fetchRoutes();
   }
 
