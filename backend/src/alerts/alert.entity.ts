@@ -1,9 +1,23 @@
-import { Urgency } from "src/reports/report.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Train } from '../trains/train.entity';
+import { Urgency } from 'src/reports/report.entity';
 
-export interface Alert {
+@Entity('alerts')
+export class Alert {
+  @PrimaryGeneratedColumn()
   id: number;
-  trainId: number;
+
+  @Column()
   statusMessage: string;
-  urgency: Urgency;
-  trainName?: string; // Opcjonalne pole, które wypełnimy w serwisie
+
+  @Column({ type: 'int' })
+  urgency: number;
+
+  // Relacja musi wskazywać na kolumnę trainId
+  @ManyToOne(() => Train, (train) => train.alerts, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'trainId' }) // To jest kluczowe!
+  train: Train;
+
+  @Column()
+  trainId: number; // Dodaj to pole jawnie, ułatwia seedowanie
 }
