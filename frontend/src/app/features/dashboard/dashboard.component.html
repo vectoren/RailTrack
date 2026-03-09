@@ -16,15 +16,14 @@
 
 
   <main class="dashboard-grid">
-
     <section class="card alerts-section">
       <h3>Pilne Alerty</h3>
       <div class="alert-scroll-container">
         <ul class="alert-list">
           @for(alert of sortedAlerts(); track $index){
-          <li class="alert-item" [ngClass]="getUrgencyClass(alert.urgency)">
-            <strong>{{alert.trainName}}</strong> {{alert.statusMessage}}
-          </li>
+            <li class="alert-item" [ngClass]="getUrgencyClass(alert.urgency)">
+              <strong>{{alert.trainName}}</strong> {{alert.statusMessage}}
+            </li>
           } @empty {
           <li class="alert-item no-alerts">Brak aktywnych alertów systemowych</li>
           }
@@ -36,25 +35,36 @@
       <h3>Zgłoszenia na sieci</h3>
       <div class="reports-container">
         @for(report of sortedReports(); track report.id) {
-        <div class="report-item" [ngClass]="getUrgencyClass(report.urgency)">
-          <div class="report-header">
-            <span class="urgency-badge">{{ getUrgencyLabel(report.urgency) }}</span>
+          <div class="report-item" [ngClass]="getUrgencyClass(report.urgency)">
+            <div class="report-header">
+              <span class="urgency-badge">{{ getUrgencyLabel(report.urgency) }}</span>
             <span class="reporter-id">Numer Zgłaszającego: #{{ report.reporterId }}</span>
+            </div>
+            <p class="report-content">{{ report.content }}</p>
           </div>
-          <p class="report-content">{{ report.content }}</p>
-        </div>
         } @empty {
         <div class="no-reports">Brak aktywnych zgłoszeń</div>
         }
       </div>
     </section>
 
-    <section class="card forecast-section">
-      <h3>Nadchodzące serwisy</h3>
-      <div class="forecast-chart">
-        <p>Pon: 2 | Wt: 0 | Śr: 4 | Czw: 1</p>
-      </div>
-    </section>
-
+    <div class="maintenance-column">
+      <section class="card maintenance-section">
+        <h3>Stan Przeglądów</h3>
+        <div class="maintenance-list">
+          @for(train of trains(); track train.id) {
+            <div class="maintenance-item">
+              <div class="maint-info">
+                <span>{{ train.name }}</span>
+                <small>{{ (train.mileage % 100000).toLocaleString() }} km</small>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="(train.mileage % 100000) / 1000"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
   </main>
 </div>

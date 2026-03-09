@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   trainService = inject(TrainService);
   alertService = inject(AlertService);
   reportService = inject(ReportService);
+  trains = this.trainService.trains;
   ngOnInit(): void {
     this.trainService.loadTrains();
     this.alertService.fetchAlerts();
