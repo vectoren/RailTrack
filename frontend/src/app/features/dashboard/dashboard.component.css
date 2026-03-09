@@ -71,7 +71,7 @@
 .alert-scroll-container, 
 .reports-container,
 .maintenance-list {
-  max-height: 520px;
+  height: 520px;
   overflow-y: auto;
   padding-right: 10px;
 }

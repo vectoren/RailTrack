@@ -132,7 +132,7 @@ export class MapViewComponent implements OnInit {
       ctx.stroke();
 
       ctx.fillStyle = '#333';
-      ctx.font = `${12 / this.scale}px sans-serif`;
+      ctx.font = `${14 / this.scale}px sans-serif`;
       ctx.fillText(s.stationName, s.x + (10 / this.scale), s.y + (4 / this.scale));
     });
     ctx.restore();
