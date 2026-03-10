@@ -16,14 +16,14 @@ export class DetailsPageComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   
-  selectedTrain = signal<Train | null>(null);
+  train = signal<Train | null>(null);
   
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get("id"));
     this.trainService.getTrainById(id).subscribe({
-      next: (train) => {
-        this.selectedTrain.set(train);
-        console.log('Pobrano szczegóły:', train);
+      next: (data) => {
+        this.train.set(data);
+        console.log('Pobrano szczegóły:', data);
       },
       error: (err) => console.error('Nie udało się pobrać pociągu', err)
     });
@@ -39,8 +39,16 @@ export class DetailsPageComponent implements OnInit {
     return labels[status] || status;
   }
 
+  getEntryStatus(status: string){
+    const labels: Record<string, string> = {
+      'Completed' : "Wykonane",
+      "In Progress" : "W trakcie"
+    };
+    return labels[status] || status;
+  }  
+
   goBack(){
-    this.selectedTrain.set(null);
+    this.train.set(null);
     this.router.navigate(['/train-list'])
   }
 }

@@ -13,7 +13,8 @@ export class TrainsService {
   // Pobiera wszystkie pociągi z bazy
   async findAll(): Promise<Train[]> {
     return await this.trainsRepository.find({
-      order: { id: 'ASC' }
+      order: { id: 'ASC' },
+      relations: ['serviceHistory']
     });
   }
 
