@@ -11,6 +11,8 @@ import { TrainRoute } from './routes/route.entity';
 import { Alert } from './alerts/alert.entity';
 import { Train } from './trains/train.entity';
 import { Report } from './reports/report.entity';
+import { MaintenanceEvent } from './maintenance/maintenance-event.entity';
+import { MaintenanceModule } from './maintenance/maintenance-event.module';
 
 @Module({
   imports: [
@@ -20,11 +22,12 @@ import { Report } from './reports/report.entity';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Train, Alert, Report, TrainRoute]),
+    TypeOrmModule.forFeature([Train, Alert, Report, TrainRoute, MaintenanceEvent]),
     TrainsModule,
     AlertsModule,
     ReportsModule,
     RoutesModule,
+    MaintenanceModule
   ],
   controllers: [AppController],
   providers: [AppService, SeedService],

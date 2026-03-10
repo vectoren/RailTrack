@@ -19,12 +19,17 @@ export class TrainsService {
 
   // Szuka pociągu po ID
   async findOne(id: number): Promise<Train> {
-    const train = await this.trainsRepository.findOne({ where: { id } });
-    if (!train) {
-      throw new NotFoundException(`Train with ID ${id} not found`);
+  const train = await this.trainsRepository.findOne({
+    where: { id },
+    relations: ['serviceHistory'], // To dociągnie tablicę historii
+    order: {
+      serviceHistory: { date: 'DESC' } // Najnowsze serwisy na górze
     }
-    return train;
-  }
+  });
+  
+  if (!train) throw new NotFoundException('Pociąg nie istnieje');
+  return train;
+}
 
   // Tworzy i zapisuje nowy pociąg
   async create(newTrain: Partial<Train>): Promise<Train> {
