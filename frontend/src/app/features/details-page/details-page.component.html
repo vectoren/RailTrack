@@ -4,7 +4,7 @@
     <button class="btn-back" (click)="goBack()">Powrót</button>
   </header>
 
-  @if(selectedTrain(); as train) {
+  @if(train(); as train) {
   <div class="train-details-card">
     <div class="status-bar" [ngClass]="train.status"></div>
 
@@ -22,7 +22,7 @@
             <span class="label">Rodzaj lokomotywy/EZT</span>
             <span class="value">{{ train.type }}</span>
           </div>
-          
+
           <div class="detail-group">
             <span class="label">Aktualny przebieg</span>
             <span class="value">{{ train.mileage | mileage }} km</span>
@@ -34,14 +34,54 @@
           </div>
         </div>
       </div>
-
-      <div class="card-actions">
-        <button class="btn-edit-large">✏️ Edytuj dane</button>
-        <button class="btn-history" disabled>📋 Historia serwisu</button>
-      </div>
     </div>
   </div>
   } @else {
-    <div class="loader">Ładowanie danych taboru...</div>
+  <div class="loader">Ładowanie danych taboru...</div>
+  }
+
+  @if (train(); as trainData) {
+  <div class="maintenance-container">
+    <div class="maintenance-header">
+      <h3>Service & Maintenance History</h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="maintenance-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Opis</th>
+            <th>Serwisant</th>
+            <th class="text-right">Koszt</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of trainData.serviceHistory; track entry.id) {
+          <tr>
+            <td class="col-date">{{ entry.date | date:'dd.MM.yyyy' }}</td>
+            <td class="col-desc">{{ entry.description }}</td>
+            <td class="col-tech">
+              <span class="tech-badge">{{ entry.technician }}</span>
+            </td>
+            <td class="col-cost text-right">{{ entry.cost | number:'1.2-2' }} PLN</td>
+            <td class="col-status text-center">
+              <span class="status-pill" [attr.data-status]="entry.status">
+                {{ getEntryStatus(entry.status) }}
+              </span>
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="5" class="empty-state">Nie znaleziono danych serwisowych</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  } @else {
+  <div class="loader">Ładowanie danych...</div>
   }
 </div>

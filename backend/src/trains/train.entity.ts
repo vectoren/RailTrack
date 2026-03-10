@@ -1,5 +1,8 @@
 import { Alert } from "src/alerts/alert.entity";
+import { MaintenanceEvent } from "src/maintenance/maintenance-event.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
+
 
 @Entity("trains")
 export class Train {
@@ -9,10 +12,12 @@ export class Train {
   name: string;      // e.g., "Pendolino ED250"
   @Column()
   type: string;     // e.g., "Alstom"
-  @Column({default: 'standby'})
+  @Column({ default: 'standby' })
   status: 'active' | 'standby' | 'maintenance' | 'out_of_service';
-  @Column({type: "int", default: 0 })
-  mileage: number;   // in kilometers
+  @Column({ type: "int", default: 0 })
+  mileage: number;  // in kilometers
   @OneToMany(() => Alert, (alert) => alert.train)
-  alerts: Alert[]
+  alerts: Alert[];
+  @OneToMany(() => MaintenanceEvent, (event) => event.train)
+  serviceHistory: MaintenanceEvent[];
 }

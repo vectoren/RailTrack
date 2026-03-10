@@ -18,7 +18,15 @@
 
       <div class="train-info">
         <span class="train-name">{{ train.name }}</span>
-        <span class="train-model">{{ train.type }} • {{ train.mileage | mileage }} km</span>
+        <span class="train-model">
+          @if (getLatestMaintenanceDate(train); as lastService) {
+          Ostatni serwis: {{ lastService | date:'dd.MM.yyyy' }}
+          } @else {
+          <span class="no-data text-muted">Brak danych serwisowych</span>
+          }
+           • {{train.mileage | mileage}}km
+          
+        </span>
       </div>
 
       <div class="status-badge" [ngClass]="train.status">

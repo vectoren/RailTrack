@@ -15,19 +15,19 @@ import { RouterLink } from "@angular/router";
 export class TrainListComponent implements OnInit {
   public trainService = inject(TrainService);
   searchQuery = signal('');
-  
+
   filteredTrains = computed(() => {
     const query = this.searchQuery().toLowerCase();
     const trains = this.trainService.trains();
-    
+
     if (!query) return trains;
-    
+
     return trains.filter(t =>
       t.name.toLowerCase().includes(query) ||
       t.type.toLowerCase().includes(query)
     );
   });
-  
+
   ngOnInit(): void {
     this.trainService.loadTrains();
   }
@@ -47,7 +47,15 @@ export class TrainListComponent implements OnInit {
     return labels[status] || status;
   }
 
-  editTrain(train: Train) {
+  getLatestMaintenanceDate(train: Train): string | null {
+    if (!train.serviceHistory || train.serviceHistory.length === 0) {
+      return null;
+    }
 
+    // Sortujemy daty i bierzemy pierwszą (najnowszą)
+    const dates = train.serviceHistory.map(e => new Date(e.date).getTime());
+    const latestTimestamp = Math.max(...dates);
+
+    return new Date(latestTimestamp).toString();
   }
 }
